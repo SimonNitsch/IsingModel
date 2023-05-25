@@ -12,11 +12,11 @@ Final_Plot.py and the Lattice_Data_xxx folders outside of this pipeline and aren
 So, Final_Plot.py needs to be executed separately
 
 The necessary files for compilation are:
-main.cpp
-Lattice.cpp
-Lattice.h
-main.py
-Functions.py
+main.cpp,
+Lattice.cpp,
+Lattice.h,
+main.py,
+Functions.py,
 
 For compilation on Windows I would recommend clang++,
 as the latest available g++ version ported Windows (8.1.0) has several bugs in the filesystem.h file,
