@@ -16,7 +16,7 @@ main.cpp,
 Lattice.cpp,
 Lattice.h,
 main.py,
-Functions.py,
+Functions.py.
 
 For compilation on Windows I would recommend clang++,
 as the latest available g++ version ported Windows (8.1.0) has several bugs in the filesystem.h file,
