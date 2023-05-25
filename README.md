@@ -19,7 +19,7 @@ main.py,
 Functions.py.
 
 For compilation on Windows I would recommend clang++,
-as the latest available g++ version ported Windows (8.1.0) has several bugs in the filesystem.h file,
+as the latest available g++ version ported to Windows (8.1.0) has several bugs in the filesystem.h file,
 leading to errors when including the std::filesystem library.
 
 The requirements for Python are version 3, as main.cpp will execute a python3 command in the shell.
