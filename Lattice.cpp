@@ -116,10 +116,10 @@ void Lattice<L>::run(long long measurements)
 
         }
 
-        sq_E_mean = running_mean(Energy_vec, i+1, sq_E_mean, true);
-        sq_M_mean = running_mean(Magnet_vec, i+1, sq_M_mean, true);
-        E_mean = running_mean(Energy_vec, i+1, E_mean, false);
-        M_mean = running_mean(Magnet_vec, i+1, M_mean, false);
+        sq_E_mean = running_mean(Energy_vec, i+1, sq_E_mean, true, true);
+        sq_M_mean = running_mean(Magnet_vec, i+1, sq_M_mean, true, false);
+        E_mean = running_mean(Energy_vec, i+1, E_mean, false, true);
+        M_mean = running_mean(Magnet_vec, i+1, M_mean, false, false);
         
         EM[0] = E_mean / static_cast<double>(L2);
         EM[1] = std::sqrt(sq_E_mean - std::pow(E_mean,2)) / static_cast<double>(L2);
@@ -523,16 +523,23 @@ int Lattice<L>::findDigits(int x) {
 
 template<const std::size_t L>
 template<typename T>
-double Lattice<L>::running_mean(std::vector<T>* vec, long long old_vec_size, double current_mean, bool squared){
+double Lattice<L>::running_mean(std::vector<T>* vec, long long old_vec_size, double current_mean, bool squared, bool is_J){
+    
+    double J2;
+    if (is_J){
+        J2 = J;
+    } else{
+        J2 = 1;
+    }
     
     double new_mean;
     if (squared){
-        double sum = std::round(static_cast<double>(old_vec_size) * current_mean / J / J) * J * J;
+        double sum = std::round(static_cast<double>(old_vec_size) * current_mean / J2 / J2) * J2 * J2;
         new_mean = (sum + std::pow(static_cast<double>(vec->back()), 2)) / static_cast<double>(old_vec_size + 1);
         return(new_mean);
     } 
     
-    double sum = std::round(static_cast<double>(old_vec_size) * current_mean / J) * J;
+    double sum = std::round(static_cast<double>(old_vec_size) * current_mean / J2) * J2;
     new_mean = (sum + static_cast<double>(vec->back())) / static_cast<double>(old_vec_size + 1);
     return(new_mean);
 }
